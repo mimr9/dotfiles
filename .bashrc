@@ -74,9 +74,21 @@ alias fas="espeak -v fa"
 alias gen="openssl rand -base64"
 alias tasks="task next"
 alias taskj="timew day; jdate; task calendar; task next"
+alias ee="exit; exit;"
+alias moff="xset dpms force off"
 #alias brightness="xrandr --output eDP-1 --brightness"
+alias trayerr="trayer --expand true --widthtype request --transparent true --alpha 255 --edge top --align right &"
+#alias pin="kdeconnect-cli --name motorola --ping"
+alias xpada="more .config/xpad/content-EN1E4Z"
+alias xpadb="more .config/xpad/content-JIH85Z"
 
-PATH="$PATH:/home/mimr9/bin:/sbin:/usr/node/bin"
+PATH="$PATH:/home/mimr9/bin:/sbin:/usr/node/bin:/snap/bin:~/.emacs.d/bin:/home/mimr9/.local/bin"
 export CFLAGS="-Wall -g"
 
+set -o vi
 
+#export ANDROID_HOME=/home/mimr9/Android
+#export PATH=$PATH:$ANDROID_HOME/tools
+#export PATH=$PATH:$ANDROID_HOME/tools/bin
+#export PATH=$PATH:$ANDROID_HOME/platform-tools
+#http_proxy="127.0.0.1:9050"

@@ -10,6 +10,7 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
+
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
@@ -57,7 +58,7 @@ editor_cmd = terminal .. " -e " .. editor
 -- If you do not like this or do not have such a key,
 -- I suggest you to remap Mod4 to another key using xmodmap or other tools.
 -- However, you can use another modifier like Mod1, but it may interact with others.
-modkey = "Mod1"
+modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
@@ -255,8 +256,8 @@ root.buttons(gears.table.join(
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
-    awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
-              {description="show help", group="awesome"}),
+    --awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
+              --{description="show help", group="awesome"}),
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
               {description = "view previous", group = "tag"}),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext,
@@ -276,14 +277,37 @@ globalkeys = gears.table.join(
         end,
         {description = "focus previous by index", group = "client"}
     ),
-    awful.key({ modkey,           }, "w", function () mymainmenu:show() end,
-              {description = "show main menu", group = "awesome"}),
+    --awful.key({ modkey,           }, "w", function () mymainmenu:show() end,
+              --{description = "show main menu", group = "awesome"}),
 
+    awful.key({ modkey,     }, "e", function () awful.spawn("xpad -t")    end,
+              {description = "toggle note takeing app appearance", group = "client"}),
+    awful.key({ modkey,     }, "r", function () awful.spawn("lifeograph -o /home/mimr9/Documents/diary/motoone.diary")    end,
+              {description = "toggle note takeing app appearance", group = "client"}),
+    awful.key({ modkey,     }, "g", function () awful.spawn("gnote")    end,
+              {description = "toggle note takeing app appearance", group = "client"}),
+    awful.key({ modkey,     }, "q", function () awful.spawn("clementine")    end,
+              {description = "toggle note takeing app appearance", group = "client"}),
+    awful.key({ modkey,     }, "d", function () awful.spawn("clementine --next")    end,
+              {description = "toggle note takeing app appearance", group = "client"}),
+    awful.key({ modkey,     }, "s", function () awful.spawn("clementine --previous")    end,
+              {description = "toggle note takeing app appearance", group = "client"}),
+    awful.key({ modkey,     }, "Up", function () awful.spawn("clementine --volume-up")    end,
+              {description = "toggle note takeing app appearance", group = "client"}),
+    awful.key({ modkey,     }, "Down", function () awful.spawn("clementine --volume-down")    end,
+              {description = "toggle note takeing app appearance", group = "client"}),
+    awful.key({ modkey,     }, "space", function () awful.spawn("clementine -t")    end,
+              {description = "toggle note takeing app appearance", group = "client"}),
+    awful.key({ modkey,     }, "w", function () awful.spawn("firefox -P nightly")    end,
+              {description = "toggle note takeing app appearance", group = "client"}),
     awful.key({ modkey,     }, "9", function () awful.spawn("tpoff")    end,
+              {description = "swap with next client by index", group = "client"}),
+    awful.key({ modkey,     }, "7", function () awful.spawn("xfce4-terminal")    end,
               {description = "swap with next client by index", group = "client"}),
     awful.key({ modkey,     }, "0", function () awful.spawn("tpon")    end,
               {description = "swap with next client by index", group = "client"}),
-    awful.key({ modkey,     }, "8", function () awful.spawn("shutter -s")   end,
+    --awful.key({ modkey,     }, "8", function () awful.spawn("shutter -s")   end,
+    awful.key({ modkey,     }, "8", function () awful.spawn("xfce4-screenshooter -r")   end,
               {description = "swap with next client by index", group = "client"}),
     awful.key({ modkey,     }, "l", function () awful.spawn("brightness-")    end,
               {description = "swap with next client by index", group = "client"}),
@@ -312,6 +336,8 @@ globalkeys = gears.table.join(
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
+    awful.key({ modkey,    "Shift"}, "Return", function () awful.spawn("emacs") end,
+              {description = "open a terminal", group = "launcher"}),
     awful.key({ modkey, "Control" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,
@@ -329,9 +355,9 @@ globalkeys = gears.table.join(
               {description = "increase the number of columns", group = "layout"}),
     awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1, nil, true)    end,
               {description = "decrease the number of columns", group = "layout"}),
-    awful.key({ modkey,           }, "space", function () awful.layout.inc( 1)                end,
+    awful.key({ modkey,           }, "a", function () awful.layout.inc( 1)                end,
               {description = "select next", group = "layout"}),
-    awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1)                end,
+    awful.key({ modkey, "Shift"   }, "a", function () awful.layout.inc(-1)                end,
               {description = "select previous", group = "layout"}),
 
     awful.key({ modkey, "Control" }, "n",
@@ -346,7 +372,7 @@ globalkeys = gears.table.join(
               {description = "restore minimized", group = "client"}),
 
     -- Prompt
-    awful.key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end,
+    awful.key({ modkey, "Shift" },            "r",     function () awful.screen.focused().mypromptbox:run() end,
               {description = "run prompt", group = "launcher"}),
 
     awful.key({ modkey }, "x",
@@ -589,13 +615,23 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
-awful.spawn("plank")
+-- Autoload programs in startup{{{
+--awful.spawn("plank")
+--awful.spawn("xfce4-panel")
 
+awful.spawn("mate-panel")
 awful.spawn("nm-applet")
 awful.spawn("blueman-applet")
 awful.spawn("compton")
 awful.spawn("xpad")
---awful.spawn("/usr/lib/x86_64-linux-gnu/libexec/kdeconnectd")
-awful.spawn("goldendict")
--- awful.spawn("/usr/lib/x86_64-linux-gnu/bamf/bamfdaemon")
+awful.spawn("uget-gtk")
+awful.spawn("/usr/lib/x86_64-linux-gnu/libexec/kdeconnectd")
+awful.spawn("kdeconnect-indicator")
+awful.spawn("/usr/lib/x86_64-linux-gnu/bamf/bamfdaemon")
 awful.spawn("synclient TapButton1=1 TapButton2=3 TapButton3=2")
+awful.spawn("/usr/lib/at-spi2-core/at-spi-bus-launcher --launch-immediately")
+
+--awful.spawn("hamster")
+--awful.spawn("gtg")
+--awful.spawn("goldendict")
+--}}}
