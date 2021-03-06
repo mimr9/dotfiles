@@ -53,7 +53,6 @@ export SCM_CHECK=true
 # Load Bash It
 source "$BASH_IT"/bash_it.sh
 
-#colorize#{{{
 #------------------------------------- man page color
 
 export LESS_TERMCAP_mb=$'\E[1;31m'     # begin bold
@@ -65,12 +64,10 @@ export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 
 #-----------------------------------------------------
-#}}}
-# aliases{{{
+
 alias e="exit"
 alias x="startx"
-#alias youtube-dl="proxychains youtube-dl"
-alias youtube-dl="youtube-dl --proxy 'socks5://127.0.0.1:9050'"
+alias youtube-dl="proxychains youtube-dl --format mp4"
 alias goo="w3m google.com"
 alias mank="man -k . -s 3"
 alias fas="espeak -v fa"
@@ -84,10 +81,8 @@ alias trayerr="trayer --expand true --widthtype request --transparent true --alp
 #alias pin="kdeconnect-cli --name motorola --ping"
 alias xpada="more .config/xpad/content-EN1E4Z"
 alias xpadb="more .config/xpad/content-JIH85Z"
-alias ydl="/usr/bin/youtube-dl"
-#}}}
 
-PATH="$PATH:/home/mimr9/bin:/sbin:/usr/node/bin:/snap/bin:~/.emacs.d/bin:/home/mimr9/.local/bin:/root/.cargo/bin:/snap/bin"
+PATH="$PATH:/home/mimr9/bin:/sbin:/usr/node/bin:/snap/bin:~/.emacs.d/bin:/home/mimr9/.local/bin"
 export CFLAGS="-Wall -g"
 
 set -o vi
@@ -97,13 +92,3 @@ set -o vi
 #export PATH=$PATH:$ANDROID_HOME/tools/bin
 #export PATH=$PATH:$ANDROID_HOME/platform-tools
 #http_proxy="127.0.0.1:9050"
-
-#npm configs#{{{
-NPM_PACKAGES="${HOME}/.npm-packages"
-
-export PATH="$PATH:$NPM_PACKAGES/bin"
-
-# Preserve MANPATH if you already defined it somewhere in your config.
-# Otherwise, fall back to `manpath` so we can inherit from `/etc/manpath`.
-export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
-#}}}

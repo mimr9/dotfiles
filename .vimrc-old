@@ -1,4 +1,5 @@
-" Start of the Vundle{{{ set nocompatible              " be iMproved, required
+" Start of the Vundle{{{
+set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
@@ -33,7 +34,7 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'majutsushi/tagbar'
 Plugin 'prabirshrestha/async.vim'
 "Plugin 'ctags.vim'
-Plugin 'dsawardekar/wordpress.vim'
+"Plugin 'dsawardekar/wordpress.vim'
 Plugin 'alvan/vim-closetag'
 Plugin 'mattn/emmet-vim'
 Plugin 'baines/vim-colorscheme-thaumaturge'
@@ -88,7 +89,7 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'ctrlp.vim'
 Plugin 'vim-bookmarks'
 Plugin 'michalliu/jsruntime.vim'
-"Plugin 'michalliu/jsoncodecs.vim'
+Plugin 'michalliu/jsoncodecs.vim'
 Plugin 'michalliu/sourcebeautify.vim'
 Plugin 'nginx.vim'
 Plugin 'https://git.drupal.org/project/vimrc.git', {'rtp': 'bundle/vim-plugin-for-drupal/'}
@@ -125,16 +126,7 @@ Plugin 'tpope/vim-haml'
 Plugin 'skywind3000/asyncrun.vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'cakebaker/scss-syntax.vim'
-Plugin 'rhysd/devdocs.vim'
-Plugin 'Yggdroot/indentLine'
-Plugin 'mattn/webapi-vim'
-Plugin 'moll/vim-node'
-Plugin 'myhere/vim-nodejs-complete'
-"Plugin 'vim-vdebug/vdebug'
-"Plugin 'puremourning/vimspector'
-Plugin 'AndrewRadev/tagalong.vim'
-
-Bundle 'https://github.com/gorodinskiy/vim-coloresque.git'
+Plugin 'loremipsum'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -151,15 +143,12 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 " End of Vundle
 "}}}
-"
 "Javascript plugins settings{{{
 "let g:javascript_plugin_flow = 1
 "let g:jsx_ext_required = 0
 "}}}
 "Colorscheme settings{{{
-set bg=dark
 colorscheme gruvbox
-"colorscheme darkblue
 "colorscheme minimalist
 "colorscheme thaumaturge
 "}}}
@@ -173,8 +162,8 @@ nnoremap tp :tabprevious<CR>
 nnoremap tt :tabnew<CR>
 nnoremap tT :VimFilerTab<CR>
 nnoremap ta :tag
-nnoremap rl :set rightleft<CR>
-nnoremap lr :set norightleft<CR>
+nnoremap rl :set rightleft
+nnoremap lr :set norightleft
 nnoremap tb :TagbarToggle<CR>
 nnoremap ss :Deol -split=otherwise<CR>
 "}}}
@@ -201,35 +190,12 @@ nnoremap <Tab> <C-w>w
 map <C-q> ZZ
 map <S-q> :xa <CR>
 
-" Compiling key mappings
-autocmd FileType python :noremap rr :AsyncRun -raw python3 % <CR>
+autocmd FileType python :norema rr :AsyncRun -raw python3 % <CR>
 let $PYTHONNUNBUFFERD = 1
-
 autocmd FileType sh :noremap rr :AsyncRun bash % <CR>
-let g:asyncrun_open = 10
-
-autocmd FileType sass :noremap rr :AsyncRun sassc % %:r.css; prettier --write %:r.css <CR>
-autocmd FileType scss :noremap rr :AsyncRun scss % %:r.css; prettier --write %:r.css <CR>
+let g:asyncrun_open = 15
 "nnoremap <leader> <Tab> :tabnext
 "
-"
-"Mapping for devdocs
-"let g:devdocs_filetype_map = {
-      "\ 'css': 'css',
-      "\ 'javascript.jsx': 'javascript',
-      "\ 'javascript.test': 'chai',
-      "\ 'html': 'html',
-      "\ 'scss': 'sass',
-      "\ 'sass': 'sass',
-      "\}
-"map <S-k> :DevDocsUnderCursor &ft <CR>
-augroup plugin-devdocs
-  autocmd!
-  autocmd FileType c,cpp,rust,haskell,python,css,javascript,html,scss,sass map <S-k> :DevDocs<Space>
-augroup END
-
-"VimFiler mapping
-autocmd FileType vimfiler nnoremap <silent><buffer><expr> t vimfiler#do_action('tabopen')
 "}}}
 
 "Omni complition{{{
@@ -240,9 +206,6 @@ inoremap <C-f> <C-x><C-o>
 syntax on
 set number
 set ma
-set tabstop=2
-set shiftwidth=2
-set expandtab
 
 set incsearch
 set hlsearch
@@ -268,20 +231,12 @@ set omnifunc=syntaxcomplete#Complete
 "autocmd BufWritePre *.js :normal gggqG}}}
 
 "YCM completor variables{{{
-"let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/.ycm_extra_conf.py"
-"let g:vcm_s_tab_behavior = 1
-"let g:completor_node_binary = '/usr/node/bin/node'
+let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/.ycm_extra_conf.py"
+let g:vcm_s_tab_behavior = 1
+let g:completor_node_binary = '/usr/node/bin/node'
 "let g:completor_clang_binary = '/usr/lib/clang/7/lib/linux/libclang_rt.dyndd-x86_64.so'
-"let g:completor_clang_binary = '/usr/bin/clang-7'
-"let g:completor_python_binary='/usr/bin/python3'
-"autocmd FileType javascript setlocal omnifunc=tern#Complete
-"
-" deoplete ternjs
-  let g:deoplete#sources#ternjs#depths = 1
-  let g:deoplete#sources#ternjs#docs = 1
-  let g:deoplete#sources#ternjs#filter = 0
-  let g:deoplete#sources#ternjs#case_insensitive = 1
-
+let g:completor_clang_binary = '/usr/bin/clang-7'
+let g:completor_python_binary='/usr/bin/python3'
 "}}}
 "deoplete startup{{{
 let g:deoplete#enable_at_startup = 1
@@ -314,10 +269,4 @@ set cursorline
 "hi CursorLine term=bold cterm=bold guibg=Grey10
 hi CursorLine ctermbg=236
 set encoding=utf-8
-set list lcs=tab:\|\ 
-"}}}
-" Custom variables{{{
-let g:user_emmet_settings = webapi#json#decode(join(readfile(expand('~/.vim/emmet-snippets.json')), "\n"))
-let g:vimspector_enable_mappings = 'HUMAN'
-packadd! vimspector
 "}}}
